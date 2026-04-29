@@ -2,18 +2,30 @@
   "name": "calculator-cli",
   "version": "0.1.0",
   "description": "CLI calculator (add, subtract, multiply, divide)",
-  "main": "src/calculator.js",
+  "main": "electron/main.js",
   "bin": {
     "calculator": "src/calculator.js"
   },
   "scripts": {
     "test": "node --test",
-    "start": "node src/calculator.js"
+    "start": "node src/calculator.js",
+    "desktop": "electron .",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder"
   },
   "engines": {
     "node": ">=18"
   },
   "preferGlobal": true,
+  "devDependencies": {
+    "electron": "^25.0.0",
+    "electron-builder": "^24.0.0"
+  },
+  "build": {
+    "appId": "com.example.calculator",
+    "files": ["**/*"],
+    "directories": { "buildResources": "assets" }
+  },
   "type": "commonjs",
   "license": "MIT"
 }
