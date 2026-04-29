@@ -2,7 +2,7 @@
 /**
  * src/calculator.js
  *
- * Node.js CLI calculator
+ * Node.js CLI calculator (app)
  * Supported operations:
  * - add
  * - subtract
@@ -10,12 +10,18 @@
  * - divide
  *
  * Usage:
- *   node src/calculator.js <operation> <num1> <num2>
+ *   calculator add 2 3
+ *   calculator subtract 5 2
+ *   calculator multiply 4 2
+ *   calculator divide 5 2
  *
- * Examples:
- *   node src/calculator.js add 2 3        # 5
- *   node src/calculator.js divide 5 2     # 2.5
+ * Flags:
+ *   -h, --help     Show help
+ *   -v, --version  Show version (reads package.json when available)
  */
+
+const fs = require('fs');
+const path = require('path');
 
 function add(a, b) {
   return a + b;
@@ -36,14 +42,39 @@ function divide(a, b) {
   return a / b;
 }
 
+function getVersion() {
+  try {
+    // Attempt to read package.json relative to repo root
+    const pkgPath = path.resolve(__dirname, '..', 'package.json');
+    const pkg = JSON.parse(fs.readFileSync(pkgPath, 'utf8'));
+    return pkg.version || '0.0.0';
+  } catch (_) {
+    return '0.0.0';
+  }
+}
+
 function printUsage() {
-  console.error('Usage: node src/calculator.js <operation> <num1> <num2>');
-  console.error('Operations: add, subtract, multiply, divide');
+  console.log('Calculator CLI — supports: add, subtract, multiply, divide');
+  console.log('Usage: calculator <operation> <num1> <num2>');
+  console.log('Flags: -h, --help    Show help');
+  console.log('       -v, --version Show version');
 }
 
 function runCLI(argv) {
   const args = argv.slice(2);
+
+  if (args.length === 0 || args.includes('-h') || args.includes('--help')) {
+    printUsage();
+    process.exit(0);
+  }
+
+  if (args.includes('-v') || args.includes('--version')) {
+    console.log(getVersion());
+    process.exit(0);
+  }
+
   if (args.length !== 3) {
+    console.error('Invalid number of arguments.');
     printUsage();
     process.exit(1);
   }
@@ -53,8 +84,8 @@ function runCLI(argv) {
   const a = parseFloat(n1Raw);
   const b = parseFloat(n2Raw);
 
-  if (Number.isNaN(a) || Number.isNaN(b)) {
-    console.error('Both operands must be valid numbers.');
+  if (!isFinite(a) || !isFinite(b)) {
+    console.error('Both operands must be valid finite numbers.');
     process.exit(1);
   }
 
@@ -86,18 +117,20 @@ function runCLI(argv) {
         process.exit(1);
     }
 
-    // Print result to stdout
-    console.log(result);
+    // Print integer results without a decimal point
+    if (Number.isFinite(result) && Number.isInteger(result)) {
+      console.log(result);
+    } else {
+      console.log(result);
+    }
   } catch (err) {
     console.error('Error:', err.message);
     process.exit(2);
   }
 }
 
-// If run directly, execute CLI
 if (require.main === module) {
   runCLI(process.argv);
 }
 
-// Export functions for testing or programmatic use
 module.exports = { add, subtract, multiply, divide, runCLI };
