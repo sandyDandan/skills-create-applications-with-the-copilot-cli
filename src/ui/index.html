@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Calculator App</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!--
+    Calculator UI (web)
+    Supported operations: add, subtract, multiply, divide
+    This is a simple browser UI for the calculator app. Open index.html in a browser (file://) or serve the src/ui folder.
+  -->
+
+  <main class="container">
+    <h1>Calculator</h1>
+
+    <div class="row">
+      <label>Operand A</label>
+      <input id="a" type="number" step="any" placeholder="Enter first number" />
+    </div>
+
+    <div class="row">
+      <label>Operand B</label>
+      <input id="b" type="number" step="any" placeholder="Enter second number" />
+    </div>
+
+    <div class="row">
+      <label>Operation</label>
+      <select id="op">
+        <option value="add">Add (+)</option>
+        <option value="subtract">Subtract (-)</option>
+        <option value="multiply">Multiply (×)</option>
+        <option value="divide">Divide (÷)</option>
+      </select>
+    </div>
+
+    <div class="row actions">
+      <button id="calc">Calculate</button>
+      <button id="clear">Clear</button>
+    </div>
+
+    <div class="row result">
+      <label>Result</label>
+      <div id="result">—</div>
+    </div>
+
+    <p class="notes">Tip: Use the keyboard (Enter) to calculate.</p>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
