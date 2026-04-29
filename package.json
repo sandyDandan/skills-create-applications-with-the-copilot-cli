@@ -7,8 +7,13 @@
     "calculator": "src/calculator.js"
   },
   "scripts": {
-    "test": "node --test"
+    "test": "node --test",
+    "start": "node src/calculator.js"
   },
+  "engines": {
+    "node": ">=18"
+  },
+  "preferGlobal": true,
   "type": "commonjs",
   "license": "MIT"
 }
