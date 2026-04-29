@@ -12,5 +12,29 @@ Remember, it's self-paced so feel free to take a break! ☕️
 
 ---
 
-&copy; 2025 GitHub &bull; [Code of Conduct](https://www.contributor-covenant.org/version/2/1/code_of_conduct/code_of_conduct.md) &bull; [MIT License](https://gh.io/mit)
+Calculator desktop app (Electron)
 
+Run locally (Windows/macOS/Linux):
+
+```bash
+# Install dependencies
+npm install
+
+# Start desktop app (development)
+npm run desktop
+```
+
+Or install globally and run the app command-line and CLI versions:
+
+```bash
+# Install globally (optional)
+npm install -g
+# Run CLI
+calculator add 2 3
+```
+
+Open the UI located at `src/ui/index.html` for a browser-based version.
+
+---
+
+&copy; 2025 GitHub • [Code of Conduct](https://www.contributor-covenant.org/version/2/1/code_of_conduct/code_of_conduct.md) • [MIT License](https://gh.io/mit)
